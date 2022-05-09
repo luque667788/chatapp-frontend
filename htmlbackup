@@ -1,0 +1,23 @@
+<div id="app">
+    <div class="border-4 border-black rounded m-auto max-w-xs text-center">
+      <div class="">Chat</div>
+    </div>
+    <div class="msgs-area">
+      <div v-for="(message, key) in messages" :key="key">
+        <div class="msg">
+          {{ message.body }}
+          <span class="msg_time"></span>
+        </div>
+      </div>
+    </div>
+    <div class="InputArea">
+      <textarea
+        v-model="newMessage"
+        name=""
+        class="textinput"
+        placeholder="Type your message..."
+        v-on:keyup.enter.exact="sendMessage"
+      ></textarea>
+      <span class="send_btn" v-on:click="sendMessage">></span>
+    </div>
+  </div>
