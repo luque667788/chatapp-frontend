@@ -51,7 +51,7 @@
             </div>
 
             <!-- Messages -->
-            <div class="h-full">
+            <div class="flex-1 h-full overflow-y-scroll" ref="scrollable">
               <message-item
                 v-for="(item, index) in chats[activechatindex].messages"
                 :key="index"
@@ -60,7 +60,10 @@
               />
             </div>
             <!-- Input -->
-            <div class="bg-grey-lighter px-4 py-4 flex items-center">
+            <div
+              class="bg-grey-lighter px-4 py-4 flex items-center"
+              ref="scrolltome"
+            >
               <input
                 type="text"
                 class="w-full justify-start border rounded px-4 py-4"
@@ -107,6 +110,13 @@ export default {
     "message-item": MessageItem,
   },
   methods: {
+    scrollToBottom: function () {
+      console.log("tring to scroll");
+      const container = this.$refs.scrollable;
+      this.$nextTick(() => {
+        container.scrollTop = container.scrollHeight;
+      });
+    },
     sendMessage: function () {
       console.log("sending message" + this.NewMessage);
       let msg = {
@@ -133,10 +143,12 @@ export default {
         for (let i = 0; i < this.chats.length; i++) {
           if (this.chats[i].username == data.user) {
             this.chats[i].messages.push(data);
+            this.scrollToBottom();
             return;
           } else if (data.user == this.username) {
             if (data.destinatary == this.chats[i].username) {
               this.chats[i].messages.push(data);
+              this.scrollToBottom();
               return;
             }
           }
@@ -175,7 +187,9 @@ export default {
   mounted: function () {
     //runs when app starts
     console.log("Starting connection to WebSocket Server");
-    this.connection = new WebSocket("ws://localhost:3030/ws");
+    const host = window.location.host.slice(0, -5); //'abcde'
+
+    this.connection = new WebSocket("ws://" + host + ":3030/ws");
     this.connection.onmessage = (event) => {
       this.receiveMessage(event);
     };

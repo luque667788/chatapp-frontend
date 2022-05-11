@@ -1,5 +1,9 @@
 <template>
-  <div class="flex mb-2 p-2" v-bind:class="{ 'justify-end': sent }">
+  <div
+    class="flex mb-2 p-2"
+    ref="scrolltome"
+    v-bind:class="{ 'justify-end': sent }"
+  >
     <div
       class="rounded py-2 px-3"
       v-bind:class="{ 'bg-green-300': sent, 'bg-neutral-300': !sent }"
