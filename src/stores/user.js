@@ -7,15 +7,12 @@ export const useUserStore = defineStore("user", {
   state: () => {
     return {
       username: "anonimous",
+      password: "anonimous",
+      port: "3030",
+
     };
   },
   getters: {
-    getUsername: (state) => state.username,
   },
-  actions: {
-    setUsername(val = "Not defined") {
-      this.username = val;
-    },
-
-  },
+  actions: {},
 });

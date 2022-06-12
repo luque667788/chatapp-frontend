@@ -9,10 +9,10 @@
 
             <!-- Contacts -->
             <div class="bg-gray flex-1 overflow-auto">
-              <div v-for="(userw, index) in chats" :key="index">
+              <div v-for="(_user, index) in chats" :key="index">
                 <chat-item
                   :isactive="index == activechatindex"
-                  :user="userw"
+                  :user="_user"
                   v-on:click="this.activechatindex = index"
                 />
               </div>
@@ -92,12 +92,17 @@ export default {
       connection: null,
       chats: [],
       activechatindex: 0,
-      username: "not defined hahah",
+      username: "not defined",
+      password: "not defined",
       NewMessage: "",
+      port: "3qfadf",
     };
   },
   beforeRouteEnter() {
-    if (useUserStore().username == "anonimous") {
+    if (
+      useUserStore().username == "anonimous" ||
+      useUserStore().password == "anonimous"
+    ) {
       return "/login";
     }
   },
@@ -111,7 +116,6 @@ export default {
   },
   methods: {
     scrollToBottom: function () {
-      console.log("tring to scroll");
       const container = this.$refs.scrollable;
       this.$nextTick(() => {
         container.scrollTop = container.scrollHeight;
@@ -136,52 +140,64 @@ export default {
       /*
       type 1 == normal message 
       type 2 == message indicating username
-      type 3 == message from server broadcasting avaible user ( for now) 
+      type 3 == message from server broadcasting avaible users ( for now) 
       */
-      if (data.type == 1) {
-        console.log("received message from " + data.user);
-        for (let i = 0; i < this.chats.length; i++) {
-          if (this.chats[i].username == data.user) {
-            this.chats[i].messages.push(data);
-            this.scrollToBottom();
-            return;
-          } else if (data.user == this.username) {
-            if (data.destinatary == this.chats[i].username) {
+      switch (data.type) {
+        case 1:
+          console.log("received message from " + data.user);
+          for (let i = 0; i < this.chats.length; i++) {
+            if (this.chats[i].username == data.user) {
               this.chats[i].messages.push(data);
               this.scrollToBottom();
               return;
+            } else if (data.user == this.username) {
+              if (data.destinatary == this.chats[i].username) {
+                this.chats[i].messages.push(data);
+                this.scrollToBottom();
+                return;
+              }
             }
           }
-        }
-        console.log("message from a user that is not in the list");
-      } else if (data.type == 3) {
-        if (data.newuser != this.username) {
-          let newUser = {
-            username: data.newuser,
-            messages: [],
-          };
+          console.log("message from a user that is not in the list");
+          break;
+        case 3: // update user list
+          for (let i = 0; i < data.allusers.length; i++) {
+            if (data.allusers[i] != this.username) {
+              let exist = false;
+              for (let ii = 0; ii < this.chats.length; ii++) {
+                if (this.chats[ii].username == data.allusers[i]) {
+                  //already is in the front-end chat list
+                  exist = true;
+                }
+              }
+              if (exist == false) {
+                let newUser = {
+                  username: data.allusers[i],
+                  messages: [],
+                };
 
-          this.chats.push(newUser);
-          console.log("added new user: " + data.newuser);
-        } else {
-          console.log("Successfuly registered at new user to the server");
-        }
-      } else {
-        console.log("ERROR unknown message type");
+                this.chats.push(newUser);
+                console.log("added new user: " + data.allusers[i]);
+              }
+            } else {
+              console.log(
+                "You was successfuly registered as new user to the server"
+              );
+            }
+          }
+
+          var filtered = this.chats.filter((value) =>
+            data.allusers.includes(value.username)
+          );
+          this.chats = filtered;
       }
     },
     getDateTime: function () {
       const today = new Date();
-      const date =
-        today.getFullYear() +
-        "-" +
-        (today.getMonth() + 1) +
-        "-" +
-        today.getDate();
-      const time =
-        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-      const timestamp = date + " " + time;
-      return timestamp;
+      //const date = today.getDate() + "-" + (today.getMonth() + 1);
+      const time = today.getHours() + ":" + today.getMinutes();
+      //const timestamp = date + " " + time;
+      return time;
     },
   },
   mounted: function () {
@@ -189,7 +205,7 @@ export default {
     console.log("Starting connection to WebSocket Server");
     const host = window.location.host.slice(0, -5); //'abcde'
 
-    this.connection = new WebSocket("ws://" + host + ":3030/ws");
+    this.connection = new WebSocket("ws://" + host + ":" + this.port + "/ws");
     this.connection.onmessage = (event) => {
       this.receiveMessage(event);
     };
@@ -198,10 +214,9 @@ export default {
       let msg = {
         type: 2,
         // later change nomeclature to sentby and sentto
-        user: this.username,
-        content: "",
-        destinatary: "username bot",
-        time: this.getDateTime(),
+        username: this.username,
+        password: this.password,
+        // ---------------MISSING IMPLEMENTATION---------------------------------------------!!!!!!!!!!!!!!!!!!!!
       };
       let message = JSON.stringify(msg);
       this.connection.send(message);
@@ -209,6 +224,8 @@ export default {
   },
   created() {
     this.username = this.userStore.username;
+    this.password = this.userStore.password;
+    this.port = this.userStore.port;
     document.title = this.username;
   },
 };

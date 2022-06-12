@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center px-3 cursor-pointer"
+    class="flex items-center px-1 cursor-pointer"
     v-bind:class="{
       'bg-gray-200': isactive,
       'bg-white  hover:bg-gray-100': !isactive,
@@ -15,9 +15,16 @@
     <div class="ml-4 flex-1 border-b border-grey-lighter py-4">
       <div class="flex items-bottom justify-between">
         <p class="text-grey-darkest">{{ user.username }}</p>
-        <p class="text-xs text-grey-darkest">12:45 pm</p>
+        <p
+          class="text-xxs md:text-sm text-grey-darkest"
+          v-if="user.messages.length > 0"
+        >
+          {{ user.messages[user.messages.length - 1].time }}
+        </p>
       </div>
-      <p class="text-grey-dark mt-1 text-sm">last message</p>
+      <p class="text-grey-dark mt-1 text-sm" v-if="user.messages.length > 0">
+        {{ user.messages[user.messages.length - 1].content }}
+      </p>
     </div>
   </div>
 </template>
