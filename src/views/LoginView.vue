@@ -38,14 +38,12 @@ export default {
     //"chat-item": ChatItem,
   },
   methods: {
-    updateUsername: function () {
+    updateALL: function () {
       this.userStore.username = this.username;
       this.username = "";
-      this.$router.push("/");
-    },
-    updatePassword: function () {
       this.userStore.password = this.password;
       this.password = "";
+      this.$router.push("/");
     },
   },
   mounted() {
