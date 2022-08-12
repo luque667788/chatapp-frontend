@@ -17,13 +17,6 @@
         v-on:keyup.enter="updatePassword"
       />
     </div>
-    <input
-      type="text"
-      class="w-full justify-start border rounded px-4 py-4"
-      placeholder="PORT"
-      v-model="this.port"
-      v-on:keyup.enter="updatePort"
-    />
   </div>
 </template>
 
@@ -36,7 +29,6 @@ export default {
     return {
       username: "",
       password: "",
-      port: "",
     };
   },
   computed: {
@@ -50,10 +42,6 @@ export default {
       this.userStore.username = this.username;
       this.username = "";
       this.$router.push("/");
-    },
-    updatePort: function () {
-      this.userStore.port = this.port;
-      this.port = "";
     },
     updatePassword: function () {
       this.userStore.password = this.password;

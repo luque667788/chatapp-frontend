@@ -8,7 +8,6 @@ export const useUserStore = defineStore("user", {
     return {
       username: "anonimous",
       password: "anonimous",
-      port: "3030",
 
     };
   },

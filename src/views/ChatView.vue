@@ -95,7 +95,6 @@ export default {
       username: "not defined",
       password: "not defined",
       NewMessage: "",
-      port: "3qfadf",
     };
   },
   beforeRouteEnter() {
@@ -205,7 +204,7 @@ export default {
     console.log("Starting connection to WebSocket Server");
     const host = window.location.host.slice(0, -5); //'abcde'
 
-    this.connection = new WebSocket("ws://" + host + ":" + this.port + "/ws");
+    this.connection = new WebSocket("ws://" + host + ":8081" + "/ws");
     this.connection.onmessage = (event) => {
       this.receiveMessage(event);
     };
@@ -225,7 +224,6 @@ export default {
   created() {
     this.username = this.userStore.username;
     this.password = this.userStore.password;
-    this.port = this.userStore.port;
     document.title = this.username;
   },
 };
