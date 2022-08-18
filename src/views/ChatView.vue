@@ -5,7 +5,9 @@
         <div class="flex h-screen">
           <!-- Left -->
           <div class="w-1/3 flex flex-col border-2">
-            <div class="text-xl">{{ this.username }}</div>
+            <div class="text-xl">
+              {{ this.username + " (" + this.success + ")" }}
+            </div>
 
             <!-- Contacts -->
             <div class="bg-gray flex-1 overflow-auto">
@@ -95,6 +97,7 @@ export default {
       username: "not defined",
       password: "not defined",
       NewMessage: "",
+      success: "ERROR",
     };
   },
   beforeRouteEnter() {
@@ -209,6 +212,7 @@ export default {
       this.receiveMessage(event);
     };
     this.connection.onopen = () => {
+      this.success = "OK";
       console.log("Successfully connected to the echo websocket server...");
       let msg = {
         type: 2,
