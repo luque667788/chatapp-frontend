@@ -97,7 +97,7 @@ export default {
       username: "not defined",
       password: "not defined",
       NewMessage: "",
-      success: "ERROR",
+      success: "trying to connect",
     };
   },
   beforeRouteEnter() {
@@ -212,7 +212,7 @@ export default {
       this.receiveMessage(event);
     };
     this.connection.onopen = () => {
-      this.success = "OK";
+      this.success = "connected";
       console.log("Successfully connected to the echo websocket server...");
       let msg = {
         type: 2,
