@@ -204,7 +204,7 @@ export default {
     console.log("Starting connection to WebSocket Server");
     //const host = window.location.host.slice(0, -5); //'abcde'
     const host = "polar-island-01862.herokuapp.com";
-    this.connection = new WebSocket("ws://" + host + "/ws");
+    this.connection = new WebSocket("wss://" + host + "/ws");
     this.connection.onmessage = (event) => {
       this.receiveMessage(event);
     };
