@@ -6,7 +6,7 @@ export const useUserStore = defineStore("user", {
   // other options...
   state: () => {
     return {
-      username: "anonimous",
+      username: "Escolha seu Nome e Senha",
       password: "anonimous",
 
     };
