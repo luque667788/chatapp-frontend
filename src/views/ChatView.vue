@@ -202,9 +202,9 @@ export default {
   mounted: function () {
     //runs when app starts
     console.log("Starting connection to WebSocket Server");
-    const host = window.location.host.slice(0, -5); //'abcde'
-
-    this.connection = new WebSocket("ws://" + host + ":8081" + "/ws");
+    //const host = window.location.host.slice(0, -5); //'abcde'
+    const host = "polar-island-01862.herokuapp.com";
+    this.connection = new WebSocket("ws://" + host + "/ws");
     this.connection.onmessage = (event) => {
       this.receiveMessage(event);
     };
