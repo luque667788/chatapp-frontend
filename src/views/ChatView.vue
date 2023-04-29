@@ -141,10 +141,15 @@ export default {
       let data = JSON.parse(event.data);
       /*
       type 1 == normal message 
-      type 2 == message indicating username
+      type 2 == first message for log in
+
       type 3 == message from server broadcasting avaible users ( for now) 
+      type 4 == message indicating error or etc
+
       */
       switch (data.type) {
+        case 4:
+          this.success = data.content;
         case 1:
           console.log("received message from " + data.user);
           for (let i = 0; i < this.chats.length; i++) {
@@ -182,6 +187,7 @@ export default {
                 console.log("added new user: " + data.allusers[i]);
               }
             } else {
+              this.success = "Loged on";
               console.log(
                 "You was successfuly registered as new user to the server"
               );
