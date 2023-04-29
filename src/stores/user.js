@@ -8,6 +8,7 @@ export const useUserStore = defineStore("user", {
     return {
       username: "Escolha seu Nome e Senha",
       password: "anonimous",
+      success: "tring to connect",
 
     };
   },

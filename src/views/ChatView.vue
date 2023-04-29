@@ -6,7 +6,7 @@
           <!-- Left -->
           <div class="w-1/3 flex flex-col border-2">
             <div class="text-xl">
-              {{ this.username + " (" + this.success + ")" }}
+              {{ this.username + " (" + this.userStore.success + ")" }}
             </div>
 
             <!-- Contacts -->
@@ -97,7 +97,6 @@ export default {
       username: "not defined",
       password: "not defined",
       NewMessage: "",
-      success: "trying to connect",
     };
   },
   beforeRouteEnter() {
@@ -150,6 +149,7 @@ export default {
       switch (data.type) {
         //case 4:
          // this.success = data.content;
+        // break
         case 1:
           console.log("received message from " + data.user);
           for (let i = 0; i < this.chats.length; i++) {
@@ -187,7 +187,8 @@ export default {
                 console.log("added new user: " + data.allusers[i]);
               }
             } else {
-              //this.success = "Loged on";
+              
+              this.userStore.success = "Loged on";
               console.log(
                 "You was successfuly registered as new user to the server"
               );
