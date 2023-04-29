@@ -147,9 +147,9 @@ export default {
 
       */
       switch (data.type) {
-        //case 4:
-         // this.success = data.content;
-        // break
+        case 4:
+          this.userStore.success = data.content;
+          break
         case 1:
           console.log("received message from " + data.user);
           for (let i = 0; i < this.chats.length; i++) {
