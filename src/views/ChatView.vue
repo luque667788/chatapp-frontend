@@ -148,8 +148,8 @@ export default {
 
       */
       switch (data.type) {
-        case 4:
-          this.success = data.content;
+        //case 4:
+         // this.success = data.content;
         case 1:
           console.log("received message from " + data.user);
           for (let i = 0; i < this.chats.length; i++) {
@@ -187,7 +187,7 @@ export default {
                 console.log("added new user: " + data.allusers[i]);
               }
             } else {
-              this.success = "Loged on";
+              //this.success = "Loged on";
               console.log(
                 "You was successfuly registered as new user to the server"
               );
