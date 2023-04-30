@@ -102,7 +102,9 @@ export default {
   beforeRouteEnter() {
     if (
       useUserStore().username == "anonimous" ||
-      useUserStore().password == "anonimous"
+      useUserStore().password == "anonimous" ||
+      useUserStore().username == "" ||
+      useUserStore().password == ""
     ) {
       return "/login";
     }
