@@ -125,7 +125,6 @@ export default {
       console.log("sending message" + this.NewMessage);
       let msg = {
         type: 1,
-        // later change nomeclature to sentby and sentto
         user: this.username,
         content: this.NewMessage,
         destinatary: this.chats[this.activechatindex].username,
@@ -140,7 +139,7 @@ export default {
       /*
       type 1 == normal message 
       type 2 == message indicating username
-      type 3 == message from server broadcasting avaible users ( for now) 
+      type 3 == message from server broadcasting available users
       */
       switch (data.type) {
         case 1:
@@ -181,7 +180,7 @@ export default {
               }
             } else {
               console.log(
-                "You was successfuly registered as new user to the server"
+                "You are successfuly registered as new user to the server"
               );
             }
           }
@@ -194,29 +193,26 @@ export default {
     },
     getDateTime: function () {
       const today = new Date();
-      //const date = today.getDate() + "-" + (today.getMonth() + 1);
       const time = today.getHours() + ":" + today.getMinutes();
-      //const timestamp = date + " " + time;
       return time;
     },
   },
   mounted: function () {
-    //runs when app starts
+    //runs when app starts after login
     console.log("Starting connection to WebSocket Server");
-    const host = window.location.host.slice(0, -5); //'abcde'
+    const host = window.location.host.slice(0, -5);
 
     this.connection = new WebSocket("ws://" + host + ":" + this.port + "/ws");
     this.connection.onmessage = (event) => {
       this.receiveMessage(event);
     };
+    // sends the login details as first websocket message to the server as authentication
     this.connection.onopen = () => {
-      console.log("Successfully connected to the echo websocket server...");
+      console.log("Successfully connected to the websocket server...");
       let msg = {
         type: 2,
-        // later change nomeclature to sentby and sentto
         username: this.username,
         password: this.password,
-        // ---------------MISSING IMPLEMENTATION---------------------------------------------!!!!!!!!!!!!!!!!!!!!
       };
       let message = JSON.stringify(msg);
       this.connection.send(message);

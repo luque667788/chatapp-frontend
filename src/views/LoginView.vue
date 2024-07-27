@@ -1,29 +1,38 @@
 <template>
   <div class="about">
-    <h1>{{ this.userStore.username }}</h1>
+    <h1>{{ "Type in your Credentials, if the acount doesnt exist a new acount will be created" }}</h1>
     <div class="bg-grey-lighter px-4 py-4 flex items-center">
       <input
         type="text"
-        class="w-full justify-start border rounded px-4 py-4"
-        placeholder="Insira sua mensagem"
+        class="w-2/3 justify-start border rounded px-4 py-4"
+        placeholder="Type your username"
         v-model="this.username"
-        v-on:keyup.enter="updateUsername"
       />
+      <div class="px-3">
       <input
         type="text"
-        class="w-full justify-start border rounded px-4 py-4"
-        placeholder="PASSWORD"
+        class="w-auto justify-start border rounded px-4 py-4"
+        placeholder="Type your password"
         v-model="this.password"
-        v-on:keyup.enter="updatePassword"
       />
     </div>
+    </div>
+    <div class="px-4">
     <input
       type="text"
-      class="w-full justify-start border rounded px-4 py-4"
-      placeholder="PORT"
+      class="w-1/2 justify-start border rounded px-4 py-4"
+      placeholder="Specify websocket PORT (optional, default is 8080)"
       v-model="this.port"
-      v-on:keyup.enter="updatePort"
     />
+    </div>
+    <div class="px-4 py-4">
+      <button
+        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+        @click="gotochatview"
+      >
+        Login
+      </button>
+    </div>
   </div>
 </template>
 
@@ -43,21 +52,17 @@ export default {
     ...mapStores(useUserStore),
   },
   components: {
-    //"chat-item": ChatItem,
   },
   methods: {
-    updateUsername: function () {
+    gotochatview: function () {
       this.userStore.username = this.username;
-      this.username = "";
-      this.$router.push("/");
-    },
-    updatePort: function () {
-      this.userStore.port = this.port;
-      this.port = "";
-    },
-    updatePassword: function () {
       this.userStore.password = this.password;
-      this.password = "";
+      if (this.port !== "" && /^\d{4}$/.test(this.port)) {
+        this.userStore.port = this.port;
+        console.log("Changing port to: " + this.port);
+      }
+      console.log("Going to chat view");
+      this.$router.push("/");
     },
   },
   mounted() {
