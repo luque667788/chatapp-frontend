@@ -140,6 +140,7 @@ export default {
       type 1 == normal message 
       type 2 == message indicating username
       type 3 == message from server broadcasting available users
+      type 4 == message from server indicating error
       */
       switch (data.type) {
         case 1:
@@ -189,7 +190,13 @@ export default {
             data.allusers.includes(value.username)
           );
           this.chats = filtered;
+          break;
+        case 4: // message from server
+          console.log("received ERROR message from server");
+          this.userStore.errormsg = data.content;
+          break;
       }
+
     },
     getDateTime: function () {
       const today = new Date();
