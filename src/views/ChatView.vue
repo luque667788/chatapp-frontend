@@ -207,8 +207,8 @@ export default {
   mounted: function () {
     //runs when app starts after login
     console.log("Starting connection to WebSocket Server");
-    const host = window.location.host.slice(0, -5);
-
+    const host = process.env.VUE_APP_BACKEND_URL;
+    console.log("host: " + host);
     this.connection = new WebSocket("ws://" + host + ":" + this.port + "/ws");
     this.connection.onmessage = (event) => {
       this.receiveMessage(event);
