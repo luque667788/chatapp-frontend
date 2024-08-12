@@ -20,6 +20,7 @@
     <div class="px-4">
     <input
       type="text"
+      hidden="true"
       class="w-1/2 justify-start border rounded px-4 py-4"
       placeholder="Specify websocket PORT (optional, default is 8080)"
       v-model="this.port"
