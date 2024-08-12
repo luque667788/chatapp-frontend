@@ -62,7 +62,7 @@ To start the development server, run:
 npm run serve
 ```
 ### Alternative 
-  Docker
+  Running using Docker container, dockerfile is provided in the repo
 \
 \
 \
