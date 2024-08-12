@@ -1,6 +1,6 @@
 # Frontend for ChatApp
 
-This is a frontend for a chat application written in Vue.js. It uses WebSockets for real-time communication. The implementation is very basic and minimalistic, created primarily to test the backend. This project was made at the beginning of my learning curve as a software developer, so not all best practices were implemented. The application includes authentication.
+This is a frontend for a chat application written in Vue.js. It uses WebSockets for real-time communication.It implements baisc authentication and user management and also persistent message history. The implementation is very basic and minimalistic, created primarily to test the backend. This project was made at the beginning of my learning curve as a software developer, so not all best practices were implemented.
 
 ## Project Structure
 most relevant files and folders:
