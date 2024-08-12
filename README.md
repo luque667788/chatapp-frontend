@@ -4,6 +4,9 @@ This is a frontend for a chat application written in Vue.js. It uses WebSockets 
 
 The implementation is very basic and minimalistic, created primarily to test the [backend repo](https://github.com/luque667788/chatapp-backend). This project was made at the beginning of my learning curve as a software developer, so not all best practices were implemented.
 
+The app right now is deployed with docker(docker-compose file that setups the frontend, backend and the redis database) and runs in a cloud vm hosted on digital ocean.
+The following link may be available for testing: http://app.chatluiz.tech
+
 ## Project Structure
 most relevant files and folders:
 
