@@ -63,6 +63,8 @@ npm run serve
 ```
 ### Alternative 
   Docker
+
+Remeber to have the [backend](https://github.com/luque667788/chatapp-backend) and the redis database also running
 ## License
 
 This project is licensed under the MIT License.
