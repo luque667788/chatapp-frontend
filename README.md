@@ -3,19 +3,13 @@
 This is a frontend for a chat application written in Vue.js. It uses WebSockets for real-time communication. The implementation is very basic and minimalistic, created primarily to test the backend. This project was made at the beginning of my learning curve as a software developer, so not all best practices were implemented. The application includes authentication.
 
 ## Project Structure
+most relevant files and folders:
 
-- **.gitignore**: Specifies files and directories to be ignored by Git.
-- **babel.config.js**: Babel configuration file.
-- **jsconfig.json**: Configuration file for JavaScript projects.
-- **package.json**: Contains project metadata and dependencies.
-- **postcss.config.js**: Configuration for PostCSS.
 - **public/**: Contains static assets.
   - **index.html**: The main HTML file.
 - **README.md**: Project documentation.
 - **src/**: Contains the source code.
   - **App.vue**: The main Vue component.
-  - **assets/**: Contains static assets like CSS files.
-    - **tailwind.css**: Tailwind CSS file.
   - **components/**: Contains Vue components.
     - **chatitem.vue**: Component for displaying chat items.
     - **message.vue**: Component for displaying messages.
@@ -28,8 +22,6 @@ This is a frontend for a chat application written in Vue.js. It uses WebSockets 
     - **ChatView.vue**: The main chat view.
     - **LoginView.vue**: The login view.
     - **PageNotFound.vue**: The 404 error page.
-- **tailwind.config.js**: Configuration for Tailwind CSS.
-- **vue.config.js**: Vue CLI configuration file.
 
 ## Main Points of the Code
 
