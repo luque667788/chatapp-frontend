@@ -58,7 +58,8 @@ To start the development server, run:
 ```bash
 npm run serve
 ```
-
+### Alternative 
+  Docker
 ## License
 
 This project is licensed under the MIT License.
