@@ -56,8 +56,8 @@ export default {
   },
   methods: {
     gotochatview: function () {
-      this.userStore.username = this.username;
-      this.userStore.password = this.password;
+      this.userStore.username = this.username.trim();
+      this.userStore.password = this.password.trim();
       if (this.port !== "" && /^\d{4}$/.test(this.port)) {
         this.userStore.port = this.port;
         console.log("Changing port to: " + this.port);
